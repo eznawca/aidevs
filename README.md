@@ -8,7 +8,8 @@ Skrypt przechowuje i pobiera sekrety ze zmiennych środowiskowych.
 
 Ustaw zmienną środowiskową w konfiguracji Virtual Hosta za pomocą wpisu:
 ```
-SetEnv AIDEVS_API_KEY 33c...0d9
+SetEnv APIKEY_AIDEVS 33c...0d9
+SetEnv APIKEY_OPENAI sk-...91ln
 ```
 - `.htaccess` w katalogu twojego projektu (Apache2, dla dowolnego systemu)
 - `httpd-vhosts.conf` (dla Windows)
