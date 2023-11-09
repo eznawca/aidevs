@@ -12,7 +12,7 @@ class AIDevs extends App
 	 */
 	public function getToken()
 	{
-		$url = $this->base_url . '/token/' . $this->task;
+		$url = $this->url_aidevs . '/token/' . $this->task;
 		$data = json_encode(['apikey' => $this->api_key]);
 		$options = [
 			'http' => [
@@ -38,7 +38,7 @@ class AIDevs extends App
 	 */
 	public function getTask($token)
 	{
-		$task_url = $this->base_url . '/task/' . $token;
+		$task_url = $this->url_aidevs . '/task/' . $token;
 		$result = file_get_contents($task_url);
 		$data = json_decode($result, true);
 		if ($data['code'] !== 0) throw new Exception('Error: ' . $data['msg']);
@@ -62,7 +62,7 @@ class AIDevs extends App
 		];
 		$context  = stream_context_create($options);
 
-		$url = $this->base_url . '/answer/' . $token;
+		$url = $this->url_aidevs . '/answer/' . $token;
 		$result = file_get_contents($url, false, $context);
 		$data = json_decode($result, true);
 

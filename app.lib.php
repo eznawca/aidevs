@@ -11,24 +11,29 @@ class App
 	const APIKEY_OPENAI = 'APIKEY_OPENAI';
 	const APIKEY_AIDEVS = 'APIKEY_AIDEVS';
 
-	protected $base_url = 'https://zadania.aidevs.pl';
+	protected $url_aidevs = 'https://zadania.aidevs.pl';
+	protected $url_openai = 'https://api.openai.com';
 
 	protected $api_key;
 	protected $task_name;
-
-	/**
-	 * Pobiera APIKEY ze zmiennej środowiskowej konfiguracji APACHE:
-	 * SetEnv APIKEY_AIDEVS 33c...0d9
-	 */
-	private static function getApiKey($key)
-	{
-		return $_SERVER[$key];
-	}
 
 	function __construct($key, $task)
 	{
 		$this->task_name = $task;
 		$this->api_key = self::getApiKey($key);
+	}
+
+	/**
+	 * Pobiera APIKEY ze zmiennej środowiskowej konfiguracji APACHE:
+	 * SetEnv APIKEY_AIDEVS 33c...0d9
+	 */
+	protected static function getApiKey($key)
+	{
+		return $_SERVER[$key];
+	}
+
+	public function setUrlAidevs($url) {
+		$this->url_aidevs = $url;
 	}
 
 	static function htmlStart($title, $subtitle, $icons = true)
@@ -82,4 +87,9 @@ class App
 		$res1 = mb_substr($s, -$len_part);
 		return rtrim($res0, '.') . $hellip . ltrim($res1, '.');
 	}
+}
+
+function r($v) {
+	var_dump($v);
+	exit;
 }

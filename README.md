@@ -18,3 +18,4 @@ SetEnv APIKEY_OPENAI sk-...91ln
 
 ### Menu index.php
 /index.php zawiera menu do wszystkich skryptów zadań
+
