@@ -63,6 +63,12 @@ App::htmlStart('AIDevs', 'Menu kursu AIDevs2');
 echo 'APIKEY_AIDEVS: ' . App::getSafeApiKey(App::APIKEY_AIDEVS, 8) . '<br>' . NL;
 echo 'APIKEY_OPENAI: ' . App::getSafeApiKey(App::APIKEY_OPENAI, 8) . '<br>' . NL;
 echo '<hr>' . NL;
+
+echo '<a href="https://bravecourses.circle.so/c/informacje" target="_blank">bravecourses.circle.so - Kurs AIDev2</a>' . '<br>' . NL;
+echo '<a href="https://zadania.aidevs.pl/" target="_blank">zadania.aidevs.pl - Zadania kontrolne</a>' . '<br>' . NL;
+echo '<hr>' . NL;
+
+
 Index::htmlMenu();
 App::htmlEnd();
 
