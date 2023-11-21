@@ -11,6 +11,8 @@ class App
 	const APIKEY_OPENAI = 'APIKEY_OPENAI';
 	const APIKEY_AIDEVS = 'APIKEY_AIDEVS';
 
+	const JSON_FLAGS = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
+
 	protected $url_aidevs = 'https://zadania.aidevs.pl';
 	protected $url_openai = 'https://api.openai.com';
 
@@ -32,7 +34,13 @@ class App
 		return $_SERVER[$key];
 	}
 
-	public function setUrlAidevs($url) {
+	protected static function jsonEncodeFlags($value)
+	{
+		return json_encode($value, self::JSON_FLAGS);
+	}
+
+	public function setUrlAidevs($url)
+	{
 		$this->url_aidevs = $url;
 	}
 
@@ -89,7 +97,12 @@ class App
 	}
 }
 
-function r($v) {
-	var_dump($v);
+function r($v, $title = '') {
+	echo '<h6>'.$title.'</h6><pre><code>'.print_r($v,1).'</code></pre>';
+	echo "<br>\n";
+}
+
+function rb($v, $title = '') {
+	r($v, $title);
 	exit;
 }
