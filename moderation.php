@@ -4,6 +4,7 @@ require 'app.lib.php';
 class AIDevs extends App
 {
 	private $task = 'moderation';
+	private $task_field = 'input';
 
 	/**
 	 * 1. Pobiera token
@@ -48,7 +49,7 @@ class AIDevs extends App
 	/**
 	 * Moderuj teksty w OpenAI
 	 */
-	public function moderate_texts($arr_text)
+	public function moderateTexts($arr_text)
 	{
 		if (!is_array($arr_text)) $arr_text[] = (string)$arr_text;
 
@@ -94,7 +95,6 @@ class AIDevs extends App
 	public function sendAnswer($token, $data)
 	{
 		$jsonData = json_encode(['answer' => $data]);
-
 		$options = [
 			'http' => [
 				'header'  => 'Content-type: application/json' . CRNL
@@ -109,7 +109,7 @@ class AIDevs extends App
 		$result = file_get_contents($url, false, $context);
 		$resultData = json_decode($result, true);
 
-		return '/answer/{token:'.$token.'} returned:<br><pre>' . print_r($resultData, 1) . '</pre>' . NL;
+		return '/answer/{token: '.$token.'} returned:<br><pre>' . print_r($resultData, 1) . '</pre>' . NL;
 	}
 
 	/**
@@ -126,9 +126,9 @@ class AIDevs extends App
 
 		// KROK 3: Moderuj zdania w OpenAI
 		try {
-			$moderation_result = $this->moderate_texts($task['input']);
+			$moderation_result = $this->moderateTexts($task[$this->task_field]);
 
-			foreach ($task['input'] as $key => $sentence) {
+			foreach ($task[$this->task_field] as $key => $sentence) {
 				echo 'Zdanie ' . $key  . ': `<code>' . $sentence . '</code>` - , MODERATE='.($moderation_result[$key]?'<strong>TAK</strong>':'NIE').'<br>' . NL;
 			}
 		} catch (Exception $e) {
